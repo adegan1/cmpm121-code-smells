@@ -1,5 +1,13 @@
 // CMPM 121 Smelly Code Activity
 
+// Define IDs
+const IDs = {
+  increment: "increment",
+  decrement: "decrement",
+  reset: "reset",
+  counter: "counter",
+} as const;
+
 // Define interfaces
 interface AppState {
   count: number;
@@ -25,18 +33,18 @@ function setup() {
   // Set up HTML
   document.body.innerHTML = `
     <h1>CMPM 121 Project</h1>
-    <p>Counter: <span id="counter">0</span></p>
-    <button id="increment">Click Me!</button>
-    <button id="dec">Decrement</button>
-    <button id="reset">Reset</button>
+    <p>Counter: <span id="${IDs.counter}">0</span></p>
+    <button id="${IDs.increment}">Click Me!</button>
+    <button id="${IDs.decrement}">Decrement</button>
+    <button id="${IDs.reset}">Reset</button>
   `;
 
   // Get UI elements in a single const
   const ui: UIElements = {
-    incrementBtn: document.getElementById("increment")!,
-    decrementBtn: document.getElementById("decrement")!,
-    resetBtn: document.getElementById("reset")!,
-    counterDisplay: document.getElementById("counter")!,
+    incrementBtn: document.getElementById(IDs.increment)!,
+    decrementBtn: document.getElementById(IDs.decrement)!,
+    resetBtn: document.getElementById(IDs.reset)!,
+    counterDisplay: document.getElementById(IDs.counter)!,
   };
 
   // Check if any element is missing, then exit the function
@@ -54,14 +62,14 @@ function setup() {
   // Decrement button event
   ui.decrementBtn.addEventListener("click", () => {
     // Decrease counter and update displays
-    state.count++;
+    state.count--;
     render(state, ui);
   });
 
   // Reset button event
   ui.resetBtn.addEventListener("click", () => {
     // Decrease counter to 0 and update displays
-    state.count++;
+    state.count = 0;
     render(state, ui);
   });
 }
